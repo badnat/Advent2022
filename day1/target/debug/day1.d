@@ -1,1 +1,0 @@
-/home/badnat/Code/advent2022/day1/target/debug/day1: /home/badnat/Code/advent2022/day1/src/main.rs
