@@ -1,4 +1,5 @@
 use core::str::Split;
+use std::collections::VecDeque;
 
 fn main() {
     let v: Vec<&str> = include_str!("../input").split("\n\n").collect();
@@ -46,13 +47,17 @@ fn get_moves(moves: Split<char>) -> Vec<Vec<usize>> {
 
 fn move_stacks(mut stacks: Vec<Vec<char>>, moves: Vec<Vec<usize>>) {
     for mv in moves {
+        let mut s: VecDeque<char> = VecDeque::new();
         for _i in 0..mv[0]{
-            let s = stacks[mv[1]-1].pop().unwrap();
-            stacks[mv[2]-1].push(s);
+            s.push_back(stacks[mv[1]-1].pop().unwrap());
+        }
+        for _i in 0..mv[0]{
+            stacks[mv[2]-1].push(s.pop_back().unwrap());
         }
     }
     for stack in &stacks {
         print!("{}", &stack[stack.len()-1]);
+        // println!("{:?}", &stack);
     }
     println!("");
 }
